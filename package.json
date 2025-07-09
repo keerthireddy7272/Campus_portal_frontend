@@ -1,12 +1,28 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
+  "name": "bmsce-campus-portal",
+  "version": "1.0.0",
   "private": true,
+  "description": "Modern campus portal for BMSCE student management",
+  "keywords": [
+    "campus-portal",
+    "student-management",
+    "nextjs",
+    "typescript",
+    "tailwindcss",
+    "bmsce"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/Campus_portal_frontend.git"
+  },
+  "license": "MIT",
+  "author": "Your Name",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -66,5 +82,8 @@
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
