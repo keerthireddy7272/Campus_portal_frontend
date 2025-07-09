@@ -19,28 +19,28 @@ const quickActions = [
     title: "College Fees",
     description: "View and pay your semester fees",
     icon: CreditCard,
-    color: "bg-green-100 text-green-600",
+    color: "bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-300",
     href: "/dashboard/fees",
   },
   {
     title: "Re-Registration",
     description: "Complete your course registration",
     icon: RefreshCw,
-    color: "bg-blue-100 text-blue-600",
+    color: "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300",
     href: "/dashboard/registration",
   },
   {
     title: "Re-appearing Examination",
     description: "Register for re-appearing exams",
     icon: FileText,
-    color: "bg-orange-100 text-orange-600",
+    color: "bg-orange-100 text-orange-600 dark:bg-orange-900 dark:text-orange-300",
     href: "/dashboard/reappearing",
   },
   {
     title: "Certificates",
     description: "Download academic certificates",
     icon: GraduationCap,
-    color: "bg-purple-100 text-purple-600",
+    color: "bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-300",
     href: "/dashboard/certificates",
   },
 ]
@@ -168,11 +168,11 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent className="space-y-4">
             {recentActivities.map((activity, index) => (
-              <div key={index} className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50">
+              <div key={index} className="flex items-start space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">
                 <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium">{activity.title}</p>
-                  <p className="text-xs text-gray-500">{activity.time}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{activity.title}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{activity.time}</p>
                 </div>
               </div>
             ))}
@@ -184,25 +184,29 @@ export function DashboardOverview() {
             <CardTitle>Important Resources</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+            <div className="p-4 bg-orange-50 dark:bg-orange-950 rounded-lg border border-orange-200 dark:border-orange-800">
               <div className="flex items-center mb-2">
-                <BookOpen className="h-5 w-5 text-orange-600 mr-2" />
-                <h3 className="font-semibold text-orange-800">Previous Year Question Papers</h3>
+                <BookOpen className="h-5 w-5 text-orange-600 dark:text-orange-400 mr-2" />
+                <h3 className="font-semibold text-orange-800 dark:text-orange-200">Previous Year Question Papers</h3>
               </div>
-              <p className="text-sm text-orange-700 mb-3">Access previous year question papers for exam preparation</p>
+              <p className="text-sm text-orange-700 dark:text-orange-300 mb-3">
+                Access previous year question papers for exam preparation
+              </p>
               <Badge variant="secondary" className="text-xs">
-                Campus Intranet Only
+                Campus Internet Only
               </Badge>
             </div>
 
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
               <div className="flex items-center mb-2">
-                <BookOpen className="h-5 w-5 text-blue-600 mr-2" />
-                <h3 className="font-semibold text-blue-800">College Library Book Search</h3>
+                <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-2" />
+                <h3 className="font-semibold text-blue-800 dark:text-blue-200">College Library Book Search</h3>
               </div>
-              <p className="text-sm text-blue-700 mb-3">Search and reserve books from the college library</p>
+              <p className="text-sm text-blue-700 dark:text-blue-300 mb-3">
+                Search and reserve books from the college library
+              </p>
               <Badge variant="secondary" className="text-xs">
-                Campus Intranet Only
+                Campus Internet Only
               </Badge>
             </div>
           </CardContent>

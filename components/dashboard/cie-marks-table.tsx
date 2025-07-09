@@ -79,11 +79,11 @@ export function CIEMarksTable() {
   }
 
   const getGradeColor = (percentage: number) => {
-    if (percentage >= 90) return "text-green-600"
-    if (percentage >= 80) return "text-blue-600"
-    if (percentage >= 70) return "text-yellow-600"
-    if (percentage >= 60) return "text-orange-600"
-    return "text-red-600"
+    if (percentage >= 90) return "text-green-600 dark:text-green-400"
+    if (percentage >= 80) return "text-blue-600 dark:text-blue-400"
+    if (percentage >= 70) return "text-yellow-600 dark:text-yellow-400"
+    if (percentage >= 60) return "text-orange-600 dark:text-orange-400"
+    return "text-red-600 dark:text-red-400"
   }
 
   return (
@@ -216,13 +216,13 @@ export function CIEMarksTable() {
               </TableHeader>
               <TableBody>
                 {cieData.map((subject) => (
-                  <TableRow key={subject.id} className="hover:bg-gray-50">
-                    <TableCell className="font-medium">{subject.id}</TableCell>
+                  <TableRow key={subject.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                    <TableCell className="font-medium text-gray-900 dark:text-gray-100">{subject.id}</TableCell>
                     <TableCell>
                       <div>
-                        <div className="font-medium">{subject.course}</div>
-                        <div className="text-sm text-gray-500">({subject.courseCode})</div>
-                        <div className="text-sm text-gray-500">{subject.faculty}</div>
+                        <div className="font-medium text-gray-900 dark:text-gray-100">{subject.course}</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">({subject.courseCode})</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">{subject.faculty}</div>
                       </div>
                     </TableCell>
                     <TableCell className="text-center">
@@ -251,51 +251,63 @@ export function CIEMarksTable() {
                           {subject.aat2.marks}/{subject.aat2.total}
                         </div>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
                       )}
                     </TableCell>
                     <TableCell className="text-center">
                       {subject.lab1.marks ? (
-                        <div>
+                        <div className="text-gray-900 dark:text-gray-100">
                           {subject.lab1.marks}/{subject.lab1.total}
                         </div>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
                       )}
                     </TableCell>
                     <TableCell className="text-center">
                       {subject.lab2.marks ? (
-                        <div>
+                        <div className="text-gray-900 dark:text-gray-100">
                           {subject.lab2.marks}/{subject.lab2.total}
                         </div>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
                       )}
                     </TableCell>
                     <TableCell className="text-center">
                       {subject.labTotal.marks ? (
-                        <div>
+                        <div className="text-gray-900 dark:text-gray-100">
                           {subject.labTotal.marks}/{subject.labTotal.total}
                         </div>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
                       )}
                     </TableCell>
                     <TableCell className="text-center">
-                      {subject.finalSummary || <span className="text-gray-400">-</span>}
+                      {subject.finalSummary ? (
+                        <span className="text-gray-900 dark:text-gray-100">{subject.finalSummary}</span>
+                      ) : (
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
+                      )}
                     </TableCell>
                     <TableCell className="text-center">
-                      {subject.ncmc || <span className="text-gray-400">-</span>}
+                      {subject.ncmc ? (
+                        <span className="text-gray-900 dark:text-gray-100">{subject.ncmc}</span>
+                      ) : (
+                        <span className="text-gray-400 dark:text-gray-500">-</span>
+                      )}
                     </TableCell>
                     <TableCell className="text-center">
-                      <div className="font-semibold text-blue-600">
+                      <div className="font-semibold text-blue-600 dark:text-blue-400">
                         {subject.cieTotal.marks}/{subject.cieTotal.total}
                       </div>
                     </TableCell>
                     <TableCell className="text-center">
                       <Badge
                         variant={subject.status === "ELIGIBLE" ? "default" : "destructive"}
-                        className={subject.status === "ELIGIBLE" ? "bg-green-100 text-green-800" : ""}
+                        className={
+                          subject.status === "ELIGIBLE"
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                            : ""
+                        }
                       >
                         {subject.status}
                       </Badge>

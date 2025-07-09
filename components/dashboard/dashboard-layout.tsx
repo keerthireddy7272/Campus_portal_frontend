@@ -27,6 +27,7 @@ import {
   Sun,
   Wifi,
   WifiOff,
+  ChevronDown,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -52,7 +53,26 @@ const navigationItems = [
   { title: "CIE", url: "/dashboard/cie", icon: GraduationCap },
   { title: "Proctor Diary", url: "/dashboard/proctor", icon: FileText },
   { title: "Profile", url: "/dashboard/profile", icon: User },
-  { title: "Online Payments", url: "/dashboard/payments", icon: PaymentIcon },
+]
+
+const onlinePaymentOptions = [
+  {
+    title: "Supplementary Semester End Exam (FastTrack Fee)",
+    url: "/dashboard/payments?type=supplementary",
+  },
+  {
+    title: "Reregistration Fees",
+    url: "/dashboard/payments?type=reregistration",
+  },
+  {
+    title: "Certificates (PDC/Transcript/Gradecard etc)",
+    url: "/dashboard/payments?type=certificates",
+  },
+  {
+    title: "ICD Payment Link",
+    subtitle: "(Strictly for ICD Students Only)",
+    url: "/dashboard/payments?type=icd",
+  },
 ]
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -68,11 +88,11 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <Sidebar className="border-r border-gray-200">
-          <SidebarHeader className="border-b border-gray-200 p-4">
+        <Sidebar className="border-r border-gray-200 dark:border-gray-700">
+          <SidebarHeader className="border-b border-gray-200 dark:border-gray-700 p-4">
             <div className="flex items-center space-x-2">
               <div className="bg-blue-600 text-white px-3 py-1 rounded-md font-bold text-lg">BMSCE</div>
-              <span className="text-blue-600 font-semibold text-lg">Campus</span>
+              <span className="text-blue-600 dark:text-blue-400 font-semibold text-lg">Campus</span>
             </div>
           </SidebarHeader>
           <SidebarContent className="p-4">
@@ -87,6 +107,36 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
+              {/* Online Payments Dropdown */}
+              <SidebarMenuItem>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <SidebarMenuButton
+                      className="w-full justify-between"
+                      isActive={pathname.startsWith("/dashboard/payments")}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <PaymentIcon className="h-5 w-5" />
+                        <span>Online Payments</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4" />
+                    </SidebarMenuButton>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent side="right" className="w-80">
+                    {onlinePaymentOptions.map((option, index) => (
+                      <DropdownMenuItem key={index} asChild>
+                        <Link href={option.url} className="flex flex-col items-start py-3">
+                          <span className="font-medium text-gray-900 dark:text-gray-100">{option.title}</span>
+                          {option.subtitle && (
+                            <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">{option.subtitle}</span>
+                          )}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
