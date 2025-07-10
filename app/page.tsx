@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { GraduationCap } from "lucide-react"
 import Image from "next/image"
 
-export default function SignInPage() {
+export default function HomePage() {
   const handleWebsiteClick = () => {
     window.open("https://www.bmsce.ac.in", "_blank")
   }
@@ -71,13 +71,13 @@ export default function SignInPage() {
 
             {/* Main Heading */}
             <h2 className="text-4xl font-bold mb-4 leading-tight text-slate-900">
-              Student Sign In
-              <span className="block text-xl font-normal text-slate-600 mt-2">Access your student portal securely</span>
+              Campus Portal
+              <span className="block text-xl font-normal text-slate-600 mt-2">Your Gateway to Academic Excellence</span>
             </h2>
 
             <p className="text-base text-slate-700 mb-8 leading-relaxed max-w-md mx-auto">
-              Welcome to BMSCE Campus Portal. Sign in with your University Seat Number (USN) to access your academic
-              information, course materials, and campus services.
+              Access your academic records, course materials, attendance tracking, and comprehensive student services in
+              one secure platform.
             </p>
 
             {/* Institution Info */}
