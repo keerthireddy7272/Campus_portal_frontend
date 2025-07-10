@@ -6,79 +6,113 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Eye, EyeOff, Mail, Lock, ArrowRight, Loader2 } from "lucide-react"
+import { User, Lock, Loader2, AlertCircle, Eye, EyeOff } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export function SignInForm() {
-  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
-    email: "",
+    usn: "",
     password: "",
-    remember: false,
+    rememberMe: false,
   })
-  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError("")
+
+    // Basic validation
+    if (!formData.usn || !formData.password) {
+      setError("Please fill in all required fields")
+      setIsLoading(false)
+      return
+    }
+
+    // USN format validation
+    const usnPattern = /^[0-9]{1}[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/
+    if (!usnPattern.test(formData.usn.toUpperCase())) {
+      setError("Please enter a valid USN format (e.g., 1BM23CS137)")
+      setIsLoading(false)
+      return
+    }
 
     // Simulate authentication
     setTimeout(() => {
-      setIsLoading(false)
-      router.push("/dashboard")
-    }, 1500)
+      // Simulate potential error for demo
+      if (formData.usn.toUpperCase() === "ERROR123") {
+        setError("Invalid credentials. Please check your USN and password.")
+        setIsLoading(false)
+        return
+      }
+
+      // Simulate successful login - redirect to dashboard
+      window.location.href = "/dashboard"
+    }, 2000)
   }
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    if (error) setError("") // Clear error when user starts typing
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Email or Student ID
-          </Label>
-          <div className="relative group">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-            <Input
-              id="email"
-              type="text"
-              placeholder="Enter your email or student ID"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              className="pl-10 h-12 border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 transition-all duration-200 bg-white dark:bg-gray-700"
-              required
-            />
-          </div>
-        </div>
+      {error && (
+        <Alert variant="destructive" className="border-red-300 bg-red-100">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription className="text-red-800">{error}</AlertDescription>
+        </Alert>
+      )}
 
-        <div className="space-y-2">
-          <Label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Password
-          </Label>
-          <div className="relative group">
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={(e) => handleInputChange("password", e.target.value)}
-              className="pl-10 pr-10 h-12 border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 transition-all duration-200 bg-white dark:bg-gray-700"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            </button>
-          </div>
+      <div className="space-y-2">
+        <Label htmlFor="usn" className="text-sm font-semibold text-white">
+          USN <span className="text-red-300">*</span>
+        </Label>
+        <div className="relative group">
+          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-300 group-focus-within:text-white transition-colors" />
+          <Input
+            id="usn"
+            type="text"
+            placeholder="Enter your USN (e.g., 1BM23CS137)"
+            value={formData.usn}
+            onChange={(e) => handleInputChange("usn", e.target.value.toUpperCase())}
+            className="pl-10 h-12 border-blue-700 bg-blue-800/50 text-white placeholder:text-blue-100 focus:border-white focus:ring-white transition-all duration-200"
+            required
+            disabled={isLoading}
+            maxLength={10}
+          />
+        </div>
+        <p className="text-xs text-blue-200">Enter your University Seat Number (10 characters)</p>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="password" className="text-sm font-semibold text-white">
+          Password <span className="text-red-300">*</span>
+        </Label>
+        <div className="relative group">
+          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-300 group-focus-within:text-white transition-colors" />
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={(e) => handleInputChange("password", e.target.value)}
+            className="pl-10 pr-10 h-12 border-blue-700 bg-blue-800/50 text-white placeholder:text-blue-100 focus:border-white focus:ring-white transition-all duration-200"
+            required
+            disabled={isLoading}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-300 hover:text-white transition-colors"
+            disabled={isLoading}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
         </div>
       </div>
 
@@ -86,56 +120,42 @@ export function SignInForm() {
         <div className="flex items-center space-x-2">
           <Checkbox
             id="remember"
-            checked={formData.remember}
-            onCheckedChange={(checked) => handleInputChange("remember", checked as boolean)}
+            checked={formData.rememberMe}
+            onCheckedChange={(checked) => handleInputChange("rememberMe", checked as boolean)}
+            className="border-blue-500 data-[state=checked]:bg-white data-[state=checked]:text-blue-900"
+            disabled={isLoading}
           />
-          <Label htmlFor="remember" className="text-sm text-gray-600 dark:text-gray-400">
+          <Label htmlFor="remember" className="text-sm text-blue-200 cursor-pointer">
             Remember me
           </Label>
         </div>
-        <Link
-          href="/forgot-password"
-          className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors"
-        >
+        <Link href="/forgot-password" className="text-sm text-white hover:text-blue-100 font-medium transition-colors">
           Forgot password?
         </Link>
       </div>
 
       <Button
         type="submit"
-        className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-200 group"
+        className="w-full h-12 bg-white text-blue-900 hover:bg-blue-50 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
         disabled={isLoading}
       >
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Signing in...
+            Signing In...
           </>
         ) : (
-          <>
-            Sign In
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </>
+          "Sign In to Portal"
         )}
       </Button>
 
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t border-gray-200 dark:border-gray-600" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">New to BMSCE?</span>
-        </div>
-      </div>
-
-      <div className="text-center">
-        <Link
-          href="/sign-up"
-          className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors group"
-        >
-          Create an account
-          <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-        </Link>
+      <div className="text-center pt-4 border-t border-blue-700">
+        <p className="text-sm text-blue-200">
+          Need help accessing your account?{" "}
+          <a href="mailto:campus@bmsce.ac.in" className="text-white hover:text-blue-100 font-medium transition-colors">
+            Contact Support
+          </a>
+        </p>
       </div>
     </form>
   )

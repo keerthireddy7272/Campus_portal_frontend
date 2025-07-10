@@ -1,12 +1,13 @@
 "use client"
 
-import { SignInForm } from "@/components/auth/sign-in-form"
+import { ForgotPasswordForm } from "@/components/auth/forgot-password-form"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { GraduationCap } from "lucide-react"
+import { GraduationCap, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 
-export default function SignInPage() {
+export default function ForgotPasswordPage() {
   const handleWebsiteClick = () => {
     window.open("https://www.bmsce.ac.in", "_blank")
   }
@@ -71,13 +72,12 @@ export default function SignInPage() {
 
             {/* Main Heading */}
             <h2 className="text-4xl font-bold mb-4 leading-tight text-slate-900">
-              Student Sign In
-              <span className="block text-xl font-normal text-slate-600 mt-2">Access your student portal securely</span>
+              Password Recovery
+              <span className="block text-xl font-normal text-slate-600 mt-2">Reset Your Campus Portal Access</span>
             </h2>
 
             <p className="text-base text-slate-700 mb-8 leading-relaxed max-w-md mx-auto">
-              Welcome to BMSCE Campus Portal. Sign in with your University Seat Number (USN) to access your academic
-              information, course materials, and campus services.
+              Enter your USN to receive password reset instructions via your registered email address.
             </p>
 
             {/* Institution Info */}
@@ -107,14 +107,25 @@ export default function SignInPage() {
               </div>
             </div>
 
-            {/* Sign In Card - Dark Blue Background */}
+            {/* Back to Sign In Link */}
+            <div className="mb-6">
+              <Link
+                href="/"
+                className="inline-flex items-center text-blue-900 hover:text-blue-700 font-medium transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Sign In
+              </Link>
+            </div>
+
+            {/* Forgot Password Card - Dark Blue Background */}
             <Card className="bg-blue-900 border border-blue-800 shadow-xl">
               <CardContent className="p-8">
                 <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-white mb-2">Student Sign In</h2>
-                  <p className="text-blue-100">Access your student portal securely</p>
+                  <h2 className="text-2xl font-bold text-white mb-2">Reset Password</h2>
+                  <p className="text-blue-100">Enter your USN to reset your password</p>
                 </div>
-                <SignInForm />
+                <ForgotPasswordForm />
               </CardContent>
             </Card>
 
