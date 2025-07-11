@@ -93,7 +93,7 @@ export default function HomePage() {
         {/* Right Side - Light Gray Background */}
         <div className="flex-1 lg:w-2/5 flex items-center justify-center px-8 sm:px-12 lg:px-16 bg-gray-50">
           <div className="w-full max-w-md">
-            {/* Mobile Header */}
+            {/*{/* Mobile Header 
             <div className="lg:hidden text-center mb-8">
               <div className="inline-flex items-center justify-center mb-4">
                 <div className="bg-blue-900 text-white p-3 rounded-xl shadow-lg">
@@ -103,7 +103,7 @@ export default function HomePage() {
                   <h1 className="text-2xl font-bold text-blue-900">BMSCE</h1>
                 </div>
               </div>
-            </div>
+            </div>*/}
 
             {/* Sign In Card - White Background */}
             <Card className="bg-white border border-gray-200 shadow-xl">
