@@ -12,7 +12,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-blue-100">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-3">
         <div
