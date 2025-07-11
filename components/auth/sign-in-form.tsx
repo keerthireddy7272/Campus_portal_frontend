@@ -37,7 +37,7 @@ export function SignInForm() {
     // USN format validation
     const usnPattern = /^[0-9]{1}[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{3}$/
     if (!usnPattern.test(formData.usn.toUpperCase())) {
-      setError("Please enter a valid USN format (e.g., 1BM23CS137)")
+      setError("Please enter a valid USN format")
       setIsLoading(false)
       return
     }
@@ -80,7 +80,7 @@ export function SignInForm() {
             <Input
               id="usn"
               type="text"
-              placeholder="Enter your USN (e.g., 1BM23CS137)"
+              placeholder="Enter your USN"
               value={formData.usn}
               onChange={(e) => handleInputChange("usn", e.target.value.toUpperCase())}
               className="pl-10 h-12 border-gray-300 bg-white text-blue-900 placeholder:text-gray-500 focus:border-blue-900 focus:ring-blue-900 transition-all duration-200"

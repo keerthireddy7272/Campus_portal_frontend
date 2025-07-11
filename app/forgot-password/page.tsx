@@ -102,7 +102,6 @@ export default function ForgotPasswordPage() {
                 </div>
                 <div className="ml-3">
                   <h1 className="text-2xl font-bold text-blue-900">BMSCE</h1>
-                  <p className="text-blue-700 text-sm">Campus Portal</p>
                 </div>
               </div>
             </div>

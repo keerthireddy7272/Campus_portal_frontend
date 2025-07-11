@@ -33,7 +33,6 @@ export default function HomePage() {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-blue-900">BMSCE CAMPUS</h1>
-              <p className="text-sm text-blue-700 font-medium">Student Portal</p>
             </div>
           </div>
           <Button
@@ -102,7 +101,6 @@ export default function HomePage() {
                 </div>
                 <div className="ml-3">
                   <h1 className="text-2xl font-bold text-blue-900">BMSCE</h1>
-                  <p className="text-blue-700 text-sm">Campus Portal</p>
                 </div>
               </div>
             </div>
