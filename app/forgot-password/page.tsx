@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
         <div className="flex-1 lg:w-2/5 flex items-center justify-center px-8 sm:px-12 lg:px-16 bg-gray-50">
           <div className="w-full max-w-md">
             {/* Mobile Header */}
-            <div className="lg:hidden text-center mb-8">
+            {/*<div className="lg:hidden text-center mb-8">
               <div className="inline-flex items-center justify-center mb-4">
                 <div className="bg-blue-900 text-white p-3 rounded-xl shadow-lg">
                   <GraduationCap className="h-8 w-8" />
@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
                   <h1 className="text-2xl font-bold text-blue-900">BMSCE</h1>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Back to Sign In Link */}
             <div className="mb-6">
